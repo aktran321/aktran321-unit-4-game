@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+    
+<header>
+<!-- Added link to the jQuery Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Added a link to Bootstrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</header>    
+<body>
+    <h1 class = "jumbotron">Crystal Collector</h1>
+    <h3>Collect gems and try to match the number shown below!</h3>
+    <h2>Target Number: <span id = "target">...</span> </h2>
+    <h2>Player Number: <span id = "player"> 0 </span> </h2>
+    <p>Wins: <span id = "wins-text"> 0 </span></p>
+    <p>Losses: <span id = "losses-text"> 0 </span></p>
+
+<div class = "container-fluid">
+    <div class = "row">
+        <div class = "col-3">
+                <button id="one" class="crystal"><img src = "assets/images/gem-red.png" height=200 width=200></button>
+            </div>
+            <div class = "col-3">
+                    <button id="two" class="crystal"><img src = "assets/images/gem-orange.png" height=200 width=200></button>
+                </div>
+                <div class = "col-3">
+                        <button id="three" class="crystal"><img src = "assets/images/gem-green.png" height=200 width=200></button>
+                    </div>
+                    <div class = "col-3">
+                            <button id="four" class="crystal"><img src = "assets/images/gem-blue.png" height=200 width=200></button>
+                        </div>
+    </div>
+</div>
+    
+    
+   
+   
+
+    <script type=text/javascript>
+    // Defining Our Values
+    var playerNumber = 0;
+    var wins = 0;
+    var losses = 0;
+
+    var winsPrint = $("#wins-text");
+    var lossesPrint = $("#losses-text");
+    var playerPrint = $("#player");
+
+    // create a random number for the randomNumber variable
+    var targetNumber = $("#target");
+    var computerNumber = Math.floor((Math.random()*101) + 19);
+    console.log(computerNumber);
+    targetNumber.text(computerNumber);
+
+    // Now create four variables for the four crystals that you have
+    var crystal1 = Math.floor((Math.random()*12) + 1);
+    var crystal2 = Math.floor((Math.random()*12) + 1);
+    var crystal3 = Math.floor((Math.random()*12) + 1);
+    var crystal4 = Math.floor((Math.random()*12) + 1);
+        console.log("My crystal values in order: "+crystal1+" "+crystal2+ " "+crystal3+ " "+crystal4 );
+    $(document).ready(function() {
+        $("#one").on("click",function(){
+            // add the value of the button to the playerNumber
+            playerNumber = playerNumber + crystal1;
+            console.log(playerNumber);
+        })
+        $("#two").on("click",function(){
+            // add the value of the button to the playerNumber
+            playerNumber = playerNumber + crystal2;
+            console.log(playerNumber);
+        })
+        $("#three").on("click",function(){
+            // add the value of the button to the playerNumber
+            playerNumber = playerNumber + crystal3;
+            console.log(playerNumber);
+        })
+        $("#four").on("click",function(){
+            // add the value of the button to the playerNumber
+            playerNumber = playerNumber + crystal4;
+            console.log(playerNumber);
+        })
+
+        // We had to create a separate function here in order to update the counters for wins and losses. When any crystal button is clicked AND the 
+        // playerNumber is greater than the computerNumber or equal to it, then we do whatever is for either situation
+
+        $(".crystal").on("click",function(){
+
+            playerPrint.text(playerNumber);
+
+            if(playerNumber > computerNumber){
+            losses++;
+            console.log("My losses: "+ losses);
+            // AND THEN RESET THE PLAYERS NUMBER, COMPUTERS NUMBER, AND GEMS NUMBER
+            playerNumber=0;
+            computerNumber = Math.floor((Math.random()*101) + 19);
+            // we now need to update the numbers into the html
+            console.log(computerNumber);
+            lossesPrint.text(losses);
+            alert("You Lose!");
+            targetNumber.text(computerNumber);
+            playerPrint.text(0);
+        }
+        else if(playerNumber === computerNumber){
+            wins++;
+            console.log("My wins: "+ wins);
+            // AND THEN RESET THE PLAYERS NUMBER, COMPUTERS NUMBER, AND GEMS NUMBER
+            playerNumber=0;
+            computerNumber = Math.floor((Math.random()*101) + 19);
+            // We now need to update the numbers into the hmtl
+            console.log(computerNumber);
+            winsPrint.text(wins);
+            alert("You Win!");
+            targetNumber.text(computerNumber);
+            playerPrint.text(0);
+        }
+       
+        });
+        
+        
+    });
+
+    
+    </script>
+    </body>
+</html>
