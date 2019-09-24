@@ -1,1 +1,2 @@
 # unit-4-game
+This game generates a random target number that the player must match exactly by collecting the gems displayed at the bottom of the screen. Each gem is assigned a hidden value. If the player reaches a number that is greater than the target number, the player loses the game and the game resets to a new game with a new target value and new hidden values assigned to the gems. 
